@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Show Contacts</title>
+</head>
+<body>
+	<section>
+		
+		<div class="container">
+			<div class="card-body">
+				<h1 class="text-center">Saved Contact List</h1>
+				<table class="table table-bordered bgc">
+				  <thead>
+				    <tr>
+				      <th scope="col">S.NO</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Work</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Contact Number</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr th:each="c, no : ${contactlist}">
+				      <th scope="row" th:text="${no.count}"></th>
+				      <td th:text="${c.contactName}"></td>
+				      <td th:text="${c.work}"></td>
+				      <td th:text="${c.contactEmail}"></td>
+				      <td th:text="${c.contactNumber}"></td>
+				    </tr>
+				  </tbody>
+				</table>
+				<ul class="pagination">
+				  <li th:if="${currentpage!=0}"><a href="@{'/user/viewcontact/'+${currentpage-1}}">Prev</a></li>
+				  <li th:classappend="${currentpage+1==pg?'active':''}" th:each="pg , pgIdx : ${totalpages}"><a th:href="@{/user/viewcontact/+T(java.lang.Integer).parseInt(pgIdx)}" th:text="${pg-1}"></a></li>
+				  <li th:if="${currentpage+1 != totalpages}"><a href="@{'/user/viewcontact/'+${currentpage+1}}">Next</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		
+	</section>
+</body>
+</html>

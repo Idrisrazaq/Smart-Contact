@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="card">
+						 	<div th:if="${message}" th:classappend="${message.type}" class="alert" role="alert">
+							<small th:text="${message.content}"></small>  
+							<!-- <th:block th:remove="${#session.removeAttribute('message')}"></th:block> -->
+						</div>
+						<h1 class="text-center">Register Here</h1>
+						
+						
+						<form th:action="@{/register}" method="post" th:object="${user}">
+						
+						  <div class="form-group">
+						    <label for="name">Name</label>
+						    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('userName')?'is-invalid':''}" th:value="${user.userName}" name="userName" id="name" placeholder="Name">
+						  
+						  	<div class="invalid-feedback" th:each="e : ${#fields.errors('userName')}" th:text="${e}">
+						  	</div>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="email">Email</label>
+						    <input type="email" class="form-control" th:classappend="${#fields.hasErrors('userEmail')?'is-invalid':''}" th:value="${user.userEmail}" name="userEmail" id="email" placeholder="Email">
+						    <div class="invalid-feedback" th:each="e : ${#fields.errors('userEmail')}" th:text="${e}">
+						  	</div>
+						  </div>
+						  
+						  
+						  <div class="form-group">
+						    <label for="password">Password</label>
+						    <input type="password" class="form-control" th:classappend="${#fields.hasErrors('userPassword')?'is-invalid':''}" id="password" name="userPassword" placeholder="Password">
+						    <div class="invalid-feedback textred" th:each="e : ${#fields.errors('userPassword')}" th:text="${e}">
+						  	</div>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="password2">Confirm Password</label>
+						    <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
+						  </div>
+						  
+						  <div class="form-group">
+						  	<textarea placeholder="Enter description" rows="5" class="form-control" th:text="${user.about}" name="about"> </textarea> 
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						  <button type="reset" class="btn btn-secondary">Reset</button>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- <script th:src="@{js/index.js}"></script> -->
+</body>
+</html>

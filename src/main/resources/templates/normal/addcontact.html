@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Contact</title>
+</head>
+<body>
+	<section>
+	<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="card">
+						 <div th:if="${message}" th:classappend="${message.type}" class="alert" role="alert">
+							<small th:text="${message.content}"></small>  
+							<!--  <th:block th:remove="${#session.removeAttribute('message')}"></th:block>-->
+						</div> 
+						<h1 class="text-center">Add Contact</h1>
+						
+						
+						<form th:action="@{/user/registercontact}" method="post" th:object="${contact}">
+						
+						  <div class="form-group">
+						    <label for="name">Name</label>
+						    <input type="text" class="form-control" th:value="${contact.contactName}" name="contactName" id="name" placeholder="Name">
+						  
+						  <!-- 	<div class="invalid-feedback" th:each="e : ${#fields.errors('contactName')}" th:text="${e}">
+						  	</div> -->
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="email">Email</label>
+						    <input type="email" class="form-control" th:value="${contact.contactEmail}" name="contactEmail" id="email" placeholder="Email">
+						  <!--   <div class="invalid-feedback" th:each="e : ${#fields.errors('contactEmail')}" th:text="${e}">
+						  	</div> -->
+						  </div>
+						  
+						  
+						  <div class="form-group">
+						    <label for="work">Work</label>
+						    <input type="text" class="form-control" id="work" name="work" placeholder="Enter Work Here">
+						   <!--  <div class="invalid-feedback" th:each="e : ${#fields.errors('work')}" th:text="${e}">
+						  	</div> -->
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="cNumber">Contact Number</label>
+						    <input type="text" class="form-control" id="cNumber" name="contactNumber" placeholder="Add Contact Number">
+						  </div>
+						  
+						  <div class="form-group">
+						  	<textarea placeholder="Enter description" rows="5" class="form-control" th:text="${contact.description}" name="description"> </textarea> 
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						  <button type="reset" class="btn btn-secondary">Reset</button>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+</body>
+</html>
